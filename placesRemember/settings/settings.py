@@ -12,24 +12,24 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-dotenv_path = Path('.env')
-load_dotenv(dotenv_path=dotenv_path)
+# dotenv_path = Path('.env')
+# load_dotenv(dotenv_path=dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY','django-insecure-yxab8*yr$cy)8ss%m_!q%zx+@y&$j29no_2j_@+*@)*z_-x-ut')
+SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-yxab8*yr$cy)8ss%m_!q%zx+@y&$j29no_2j_@+*@)*z_-x-ut')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG',True)
+DEBUG = os.environ.get('DEBUG',True)
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS','127.0.0.1').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS','127.0.0.1').split(',')
 
 
 # Application definition
@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 
     # outsided apps
     'social_django',
     'storages',
+    'leaflet',
     # insided apps
     'user.apps.UserConfig',
     'post.apps.PostConfig',
@@ -84,18 +86,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'placesRemember.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -142,12 +132,22 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
-SOCIAL_AUTH_FACEBOOK_KEY = '602676894329482'
-SOCIAL_AUTH_FACEBOOK_SECRET = '94c0598a86eefbc909b70ab999eb85e8'
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('EMAIL')
-EMAIL_HOST_PASSWORD = os.getenv('PASS')
+EMAIL_HOST_USER = os.environ.get('EMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('PASS')
 EMAIL_USE_TLS = True
+
+LEAFLET_CONFIG = {
+    'TILES': 'http://tile.cloudmade.com/1/88233/256/{z}/{x}/{y}.png',
+    'DEFAULT_CENTER':(0.0,0.0),
+    'DEFAULT_ZOOM':6,
+    'MAX_ZOOM': 25,
+    'MIN_ZOOM': 3,
+    'SCALE': 'both',
+    'ATTRIBUTION_PREFIX': 'Inspired by Life in GIS'
+}

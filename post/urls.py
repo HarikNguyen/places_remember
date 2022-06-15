@@ -6,4 +6,5 @@ app_name = 'post'
 urlpatterns = [
     # path('login/', LoginView.as_view(), name='login'),
     path('', HomeView.as_view(), name='home'),
+    path('create/', CreateView.as_view(), name='create'),
 ]

@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    environment:
+      - DB_HOST=db
+      - DB_NAME=replaces
+      - DB_USER=root
+      - DB_PASS=password
+      - EMAIL=viktornguyen.test@gmail.com
+      - PASS=lehfrxpqmulrprkv
+
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-yxab8*yr$cy)8ss%m_!q%zx+@y&$j29no_2j_@+*@)*z_-x-ut
+      - ALLOWED_HOSTS=*
+
+      - SOCIAL_AUTH_FACEBOOK_KEY=602676894329482
+      - SOCIAL_AUTH_FACEBOOK_SECRET=94c0598a86eefbc909b70ab999eb85e8
+
+    depends_on:
+      - db
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+  db:
+    image: postgis/postgis:13-3.2-alpine
+    environment:
+      - POSTGRES_DB=replaces
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "12345:12345"

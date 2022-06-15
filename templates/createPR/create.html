@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load leaflet_tags %}
+
+{% block another_head %} 
+    {{ post_form.media }}
+{% endblock %}
+
+{% block title %} Create {% endblock %}
+
+{% block sign %} 
+    <div class="user_signed">
+        <span class="header__username">Hi, {{ request.user.username }}</span>
+        <a href="{% url 'accounts:logout' %}?next=/" class="sign_out">Logout</a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="grid">
+        <div class="row">
+            <div class="col xl-6 xl-o-3 l-8 l-o-2 m-12 sm-12 c-12">
+                <div class="create_wrapper">
+                    <form action="{% url 'posts:create' %}" method="post" class="login_form__form user_form__form grid">
+                        {{ post_form.as_p }}
+                        <input type="hidden" name="next" value="{{ next }}">
+                        <label for="submit" class="row">
+                            <div class="user_form__submit_button  col xl-10 l-10 m-12 sm-12 c-12 xl-o-1 l-o-1">
+                                <input 
+                                    type="submit" value="Login"
+                                    class="btn btn-primary"
+                                    required>
+                            </div>
+                        {% csrf_token %}
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock %}

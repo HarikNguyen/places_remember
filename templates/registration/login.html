@@ -42,13 +42,10 @@
                                     required>
                             </div>
                         </label>
+                        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"
+                            class=""
+                        >Login with Facebook</a>
                     </form>
-                    <!-- {% if current_user.is_authenticated %}
-                        <p>Welcome! <strong>{{ current_user }}</strong></p>
-                        <a href="#">Logout</a>
-                    {% else %}
-                        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
-                    {% endif %} -->
                 </div>
             </div>
         </div>
