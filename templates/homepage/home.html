@@ -1,0 +1,28 @@
+<!-- Homepage -->
+{%extends "base.html" %}
+
+{% block title %} Places Remember {% endblock %}
+
+{% block sign %} 
+    {% if request.user.is_authenticated %}
+        <div class="user_signed">
+            <span class="header__username">Hi, {{ request.user.username }}</span>
+            <a href="{% url 'accounts:logout' %}?next=/" class="sign_out">Logout</a>
+        </div>
+    {% else %}
+        <div class="sign">
+            <a href="{% url 'accounts:register' %}" class="sign_up">Register</a>
+            <span class="separate"></span>
+            <a href="{% url 'accounts:login' %}" class="sign_in">Login</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_authenticated %}
+    {% else %}
+    <h1 class="greeting">
+        Greeting to Places Rememeber App.
+    </h1>
+    {% endif %}
+{% endblock %}

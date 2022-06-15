@@ -1,0 +1,56 @@
+<!-- Login page -->
+{%extends "base.html" %}
+{% block title %} Login {% endblock %}
+
+{% block body %}
+    <div class="grid">
+        <div class="row">
+            <div class="col xl-6 xl-o-3 l-8 l-o-2 m-12 sm-12 c-12 user_form__wrapper">
+                <div class="login_form_wrapper user_form">
+                    <h2 class="login_form__title user_form__title">Login</h2>
+                    <p class="login_form__title user_form__description">
+                        {% if form.errors %}
+                            Username or Password is invalid, please try it again!!!
+                        {% else %}
+                            Please, use the following form to login:
+                        {% endif %}
+                    </p>
+                    <form action="{% url 'accounts:login' %}" method="post" class="login_form__form user_form__form grid">
+                        <!-- {{ form.as_p }} -->
+                        {% csrf_token %}
+                        <label for="username" class="row login_form__username">
+                            <input type="text" name="username" placeholder="Username"
+                            class="col xl-10 l-10 m-12 sm-12 c-12 xl-o-1 l-o-1 user_form__row_field">
+                        </label>
+                        <label for="password" class="row login_form__password">
+                            <a href="{% url 'accounts:password_reset' %}" 
+                                class="forgot_password col xl-10 l-10 m-12 sm-12 c-12 xl-o-1 l-o-1"
+                            >Forgotten your password...</a>
+                            <input 
+                                type="password" 
+                                name="password" 
+                                placeholder="Password"
+                                class="col xl-10 l-10 m-12 sm-12 c-12 xl-o-1 l-o-1 user_form__row_field"
+                                required>
+                        </label>
+                        <input type="hidden" name="next" value="{{ next }}">
+                        <label for="submit" class="row">
+                            <div class="user_form__submit_button  col xl-10 l-10 m-12 sm-12 c-12 xl-o-1 l-o-1">
+                                <input 
+                                    type="submit" value="Login"
+                                    class="btn btn-primary"
+                                    required>
+                            </div>
+                        </label>
+                    </form>
+                    <!-- {% if current_user.is_authenticated %}
+                        <p>Welcome! <strong>{{ current_user }}</strong></p>
+                        <a href="#">Logout</a>
+                    {% else %}
+                        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+                    {% endif %} -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

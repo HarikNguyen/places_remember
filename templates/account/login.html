@@ -1,0 +1,45 @@
+<!-- Login page -->
+{%extends "base.html" %}
+{% block title %} Login {% endblock %}
+
+{% block body %}
+    <div class="grid">
+        <div class="row">
+            <div class="col xl-6 l-6 m-12 sm-12 c-12">
+                <div class="login_form_wrapper user__form">
+                    <p class="login_form__title">
+                        Please, use the following form to login:
+                    </p>
+                    <form method="post" class="login_form__form grid">
+                        <!-- {{ form.as_p }} -->
+                        {% csrf_token %}
+                        <label for="username" class="row login_form__username">
+                            <input type="text" name="username" placeholder="Username"
+                            class="col xl-8 l-8 m-8 sm-8 c-8 xl-o-2 l-o-2 m-o-2 sm-o-2 c-o-2">
+                        </label>
+                        <label for="password" class="row login_form__password">
+                            <input 
+                                type="password" 
+                                name="password" 
+                                placeholder="Password"
+                                class="col xl-8 l-8 m-8 sm-8 c-8 xl-o-2 l-o-2 m-o-2 sm-o-2 c-o-2"
+                                required>
+                        </label>
+                        <label for="submit" class="row">
+                            <input 
+                                type="submit" value="Login"
+                                class="col xl-8 l-8 m-8 sm-8 c-8 xl-o-2 l-o-2 m-o-2 sm-o-2 c-o-2"
+                                required>
+                        </label>
+                    </form>
+                    <!-- {% if current_user.is_authenticated %}
+                        <p>Welcome! <strong>{{ current_user }}</strong></p>
+                        <a href="#">Logout</a>
+                    {% else %}
+                        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+                    {% endif %} -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

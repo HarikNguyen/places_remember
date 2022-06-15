@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Welcome {% endblock %}
+
+{% block body %}
+<div class="grid">
+    <div class="row">
+        <div class="col xl-6 xl-o-3 l-8 l-o-2 m-12 sm-12 c-12 user_form__wrapper">
+            <div class="reset_form_wrapper user_form">
+                <h2 class="reset_form__title user_form__title">Welcome {{ new_user.first_name }}</h2>
+                <p class="reset_form__subtitle user_form__description">
+                    Your account have been created. 
+                </p>
+                <p class="reset_form__subtitle user_form__description">
+                    Now you can <a href="{% url 'accounts:login' %}" class="reset_form__log_again">login</a> now.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

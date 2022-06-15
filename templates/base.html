@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="shortcut icon" href="{% static "assets/imgs/favicon.ico" %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "assets/css/reset.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/base.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/grid.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+</head>
+<body>
+    <div class="grid">
+        <div class="row no-gutters" id="header">
+            <div class="col xl-8 xl-o-2 l-8 l-o-2 m-8 m-o-2 sm- sm-o-2 c-8 c-o-2 header__containter">
+                <a href="{% url 'posts:home' %}" class="logo">Places Remember</a>
+                {% block sign %}
+                {% endblock %}
+                
+            </div>
+        </div>
+        <div class="row no-gutters" id="main_body">
+            <div class="col xl-8 xl-o-2 l-8 l-o-2 m-8 m-o-2 sm-8 sm-o-2 c-8 c-o-2">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+        <footer class="row no-gutters" id="footer">
+            <div class="col xl-12 l-12 m-12 sm-12 c-12">
+                <p class="footer__text">@viktornguyen !This is an interview test</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
